@@ -10,8 +10,8 @@ import java.net.Socket;
 
 public class CheckConfiguration implements Condition {
 
-    String host   = "3.250.203.227";
-    int port   = 22;
+    String host   = "******************";
+    int port   = 0;
 
     @Override
     public boolean matches(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata) {
