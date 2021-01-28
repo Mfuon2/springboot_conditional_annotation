@@ -15,7 +15,7 @@ public class ConditionalAppApplication {
     @Bean
     @Conditional(CheckConfiguration.class)
     public void thisExecutesOnSuccessToCondition() {
-        System.out.println("=========== > HOST AVAILABLE < ============  ");
+        //test/or execute function here if successful
     }
 
 }
