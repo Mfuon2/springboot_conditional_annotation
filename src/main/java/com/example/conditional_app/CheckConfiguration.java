@@ -4,6 +4,8 @@ import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.ListTopicsOptions;
 import org.apache.kafka.clients.admin.ListTopicsResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
@@ -20,6 +22,8 @@ import java.util.stream.Collectors;
 
 @Component
 public class CheckConfiguration implements Condition {
+
+    private static final Logger log = LoggerFactory.getLogger(CheckConfiguration.class);
 
     @Value("${kafka.broker.host.address}")
     private String host;
@@ -58,7 +62,7 @@ public class CheckConfiguration implements Condition {
             ListTopicsOptions options = new ListTopicsOptions();
             ListTopicsResult topics = client.listTopics(options);
             Set<String> currentTopicList = topics.names().get();
-            System.out.println("=========== > HOST TOPICS < ============  " + currentTopicList.toString());
+            log.warn("=========== > HOST TOPICS < ============ : {}", currentTopicList);
             Set<String> filteredResults = currentTopicList.stream()
                     .filter(c -> c.matches("claims"))
                     .collect(Collectors.toSet());
